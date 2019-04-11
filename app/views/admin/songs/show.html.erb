@@ -1,0 +1,7 @@
+<h1><%= @song.title %></h1>
+<p><%= @song.duration %></p>
+<p><%= @song.rating %></p>
+<p><%= @song.progress %></p>
+<%= link_to "Delete", admin_song_path(@song), method: :delete, data: { confirm: "Really delete the song?" } %>
+<%= link_to "Songs List", admin_songs_path %>
+<%= link_to "Edit", edit_admin_song_path(@song) %>
