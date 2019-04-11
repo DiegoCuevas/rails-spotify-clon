@@ -8,46 +8,30 @@
 
 require 'faker'
 
-songs_array = []
-albums_array = []
-artits_array = []
 
-# seed movies
-10.times do
-  songs_array << Song.create(
-    title: Faker::Movie.quote,
-    duration: rand(7200) + 1,
-    rating: rand(5) + 1,   
-    progress: 0
-  )  
-end
-
-10.times do
-  albums_array << Album.create(
-    title: Faker::Movie.quote,
-    rating: rand(5) + 1,
-  )  
-end
-
-10.times do
-  artits_array << Artist.create(
-    name: Faker::Movie.quote,
+4.times do
+  Artist.create(
+    name: Faker::Music::RockBand.name,
     age: rand(40) + 10
   )  
 end
 
-# songs_array.each do |s|
-#   s.update(
-#     albums: albums_array[(1..3)],
-#     artists: artists_array[(1..3)],
-#   )
+Artist.all.each do |artist|
+  4.times do
+    artist.albums << Album.create(
+      title: Faker::Music.album,
+      rating: rand(5) + 1,
+    ) 
+  end
+end
 
-# end
-
-# albums_array.each do |s|
-#   s.update(
-#     songs: songs_array[(1..3)],
-#     artists: artists_array[(1..3)],
-#   )
-
-# end
+Album.all.each do |album|
+  10.times do
+    album.songs << Song.create(
+      title: Faker::Music::UmphreysMcgee.song,
+      duration: rand(7200) + 1,
+      rating: rand(5) + 1,   
+      progress: 0
+    )  
+  end
+end
