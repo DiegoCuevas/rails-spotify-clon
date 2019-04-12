@@ -1,0 +1,5 @@
+<h1><%= @album.title %></h1>
+<p><%= @album.rating %></p>
+<%= link_to "Delete", admin_album_path(@album), method: :delete, data: { confirm: "Really delete the album?" } %>
+<%= link_to "Albums List", admin_albums_path %>
+<%= link_to "Edit", edit_admin_album_path(@album) %>

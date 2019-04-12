@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :songs
     resources :artists
+    resources :albums
   end 
 end
