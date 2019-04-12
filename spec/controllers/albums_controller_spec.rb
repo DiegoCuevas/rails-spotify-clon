@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module Api
-    describe EpisodesController do
+    describe AlbumsController do
         before do
             @artist = Artist.create(
               name: holi,

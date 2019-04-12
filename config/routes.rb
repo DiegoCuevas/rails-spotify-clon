@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
+    resources :artists, only: [:index, :show] do
+      get "songs", on: :member
+      get "albums", on: :member
+      get "search", on: :collection
+     end 
     resources :album , only: [:index, :show, :update] do
       get 'artists', on: :member
       get 'songs', on: :member
@@ -8,7 +12,6 @@ Rails.application.routes.draw do
       patch 'rating', on: :member
     end
   end
-
   namespace :admin do
     resources :songs
     resources :artists

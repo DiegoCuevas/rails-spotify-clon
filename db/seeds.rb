@@ -22,6 +22,12 @@ Artist.all.each do |artist|
       title: Faker::Music.album,
       rating: rand(2)-1,
     ) 
+    artist.songs << Song.create(
+      title: Faker::Music::UmphreysMcgee.song,
+      duration: rand(7200) + 1,
+      rating: rand(5) + 1,   
+      progress: 0
+    ) 
   end
 end
 
