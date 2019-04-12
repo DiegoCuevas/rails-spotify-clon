@@ -20,7 +20,7 @@ Artist.all.each do |artist|
   4.times do
     artist.albums << Album.create(
       title: Faker::Music.album,
-      rating: rand(5) + 1,
+      rating: rand(2)-1,
     ) 
   end
 end
@@ -30,8 +30,17 @@ Album.all.each do |album|
     album.songs << Song.create(
       title: Faker::Music::UmphreysMcgee.song,
       duration: rand(7200) + 1,
-      rating: rand(5) + 1,   
+      rating: rand(2) - 1,   
       progress: 0
     )  
   end
 end
+
+Artist.all.each do |artist|
+  artist.albums.each do |album|
+    album.songs.each do |song|
+      artist.songs << song
+    end
+  end
+end
+
