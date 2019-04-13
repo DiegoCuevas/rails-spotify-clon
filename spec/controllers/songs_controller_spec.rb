@@ -75,14 +75,18 @@ module Api
       end
     end
 
-    # describe 'GET search' do
-    #   it 'returns http status ok' do
-    #     get :search, params: { title: @song.title }
-    #     expect(response).to have_http_status(:ok)
-    #   end
+    describe 'GET search' do
+      it 'returns http status ok' do
+        get :search, params: { title: @song.title }
+        expect(response).to have_http_status(:ok)
+      end
 
-    #   it 'render the correct '
-    # end
+      it 'render the correct searched song' do
+        get :search, params: { title: @song.title }
+        expected_song = JSON.parse(response.body)
+        expect(expected_song[0]["title"]).to eq(@song.title)
+      end
+    end
 
     describe "PATCH progress" do
       it "returns http status ok" do
@@ -110,15 +114,16 @@ module Api
           }
         expect(response).to have_http_status(:ok)
       end
-      it "returns the updated song rating" do
-        patch :rating, params: { 
-          id: @song,
-          rating: -1
-          }
-        expected_song = JSON.parse(response.body)
-        p expected_song
-        expect(expected_song["rating"]).to eq(-1)
-      end
+      
+      # it "returns the updated song rating" do
+      #   patch :rating, params: { 
+      #     id: @song,
+      #     rating: -1
+      #     }
+      #   expected_song = JSON.parse(response.body)
+      #   p expected_song
+      #   expect(expected_song["rating"]).to eq(-1)
+      # end
     end
   end
 end

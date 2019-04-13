@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get "albums", on: :member
       get "search", on: :collection
      end 
+    
     resources :albums , only: [:index, :show, :update] do
       get 'artists', on: :member
       get 'songs', on: :member
