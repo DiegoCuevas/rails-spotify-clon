@@ -1,6 +1,8 @@
 module Api
   class AlbumsController < ApplicationController 
-    
+    def show
+      render json: Album.find(params[:id])
+    end
     def index
       render json: Album.all
     end 
@@ -21,6 +23,10 @@ module Api
     def song
       album = Album.find(params[:id])
       render json: album.songs
+    end
+    def update
+      album.update(params[:id])
+      render json: album.all
     end
   end
 end
