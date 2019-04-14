@@ -14,7 +14,7 @@ module Api
             )
           @album = Album.create(
               title: "bebecita",
-              rating: 0
+              rating: -1
             )
           @artist.albums << @album
           @album.songs << @song
