@@ -1,4 +1,4 @@
-
+require 'rails_helper'
 module Api
     describe AlbumsController do
         before do
