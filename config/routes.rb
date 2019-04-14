@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :songs, only: [:index, :show, :update] do
       get 'artists', on: :member
       get 'albums', on: :member
+      # resources :albums, only: [:index]
       get 'search', on: :collection
       patch 'progress', on: :member
       patch 'rating', on: :member
