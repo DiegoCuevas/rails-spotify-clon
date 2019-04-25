@@ -44,3 +44,14 @@ Artist.all.each do |artist|
   end
 end
 
+10.times do
+  User.create(
+    email: Faker::Internet.email,
+    username: Faker::Internet.user_name,
+    password:'aaaaaa'
+  )
+end
+
+User.create(email: "frank@aa", username:'condef5',password:'aaaaaa', role:'admin')
+User.create(email: "mayra@aa",username:'mayra', password: 'aaaaaa', role:'admin')
+p 'Seed added correctly'
