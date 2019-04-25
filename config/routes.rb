@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   namespace :api do
-    
+
     resources :songs, only: [:index, :show, :update] do
       get 'artists', on: :member
       get 'albums', on: :member
@@ -15,8 +16,8 @@ Rails.application.routes.draw do
       get "songs", on: :member
       get "albums", on: :member
       get "search", on: :collection
-     end 
-    
+     end
+
     resources :albums , only: [:index, :show, :update] do
       get 'artists', on: :member
       get 'songs', on: :member
@@ -30,5 +31,5 @@ Rails.application.routes.draw do
     resources :songs
     resources :artists
     resources :albums
-  end 
+  end
 end

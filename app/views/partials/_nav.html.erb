@@ -7,6 +7,13 @@
       <%= link_to "Songs", admin_songs_path %>
       <%= link_to "Artists", admin_artists_path %>
       <%= link_to "Albums", admin_albums_path %>
+      <% if current_user %>
+        <a href="#">Hi <%= current_user.email.split("@").first %></a>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Sign in', new_user_session_path %>
+        <%= link_to 'Sign up', new_user_registration_path %>
+      <% end %>
     </ul>
   </div>
 </nav>
