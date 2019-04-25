@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   namespace :api do
     
     resources :songs, only: [:index, :show, :update] do
@@ -23,8 +24,9 @@ Rails.application.routes.draw do
       patch 'rating', on: :member
     end
   end
-
+  root 'home#index'
   namespace :admin do
+    root 'home#index'
     resources :songs
     resources :artists
     resources :albums
