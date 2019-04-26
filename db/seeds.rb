@@ -1,5 +1,6 @@
 # My awesome seed 
-
+require "faker"
+ 
 def get_image(file_name)
   { io: File.open(File.join(Rails.root, "/app/assets/images/seed/#{file_name}")), filename: file_name }
 end
