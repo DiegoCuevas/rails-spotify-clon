@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  devise :omniauthable, omniauth_providers: %i[facebook github]
 
   has_many :providers
-
-  devise :omniauthable, omniauth_providers: %i[facebook github]
+  has_many :ratings
 
   after_create :send_welcome_mail
 

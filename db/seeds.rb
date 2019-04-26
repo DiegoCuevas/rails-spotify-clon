@@ -1,49 +1,38 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# My awesome seed 
 
-require 'faker'
-
-
-4.times do
-  Artist.create(
-    name: Faker::Music::RockBand.name,
-    age: rand(40) + 10
-  )  
+def get_image(file_name)
+  { io: File.open(File.join(Rails.root, "/app/assets/images/seed/#{file_name}")), filename: file_name }
 end
 
-Artist.all.each do |artist|
-  4.times do
-    artist.albums << Album.create(
-      title: Faker::Music.album,
-      rating: 2*rand(2)-1
-    ) 
-  end
-end
+artist = [
+  { name: 'Hyde', image: 'artists/hyde.jpg' },
+  { name: 'Nujabes', image: 'artists/nujabes.jpeg' },
+  { name: 'Frank sinatra', image: 'artists/frank-sinatra.jpeg' },
+  { name: 'Taylor Swift', image: 'artists/taylor-swift.png' },
+  { name: 'The pillows', image: 'artists/the-pillows.jpg' }
+]
 
-Album.all.each do |album|
-  10.times do
-    album.songs << Song.create(
-      title: Faker::Music::UmphreysMcgee.song,
-      duration: rand(7200) + 1,
-      rating: 2*rand(2) - 1,   
-      progress: 0
-    )  
-  end
-end
+songs = [
+  { title: 'Seasons', image: 'songs/seasons-call-me.jpg' },
+  { title: 'Folklore', image: 'songs/folklore.jpg' },
+  { title: 'My way', image: 'songs/last-dinosaur.jpg' },
+  { title: 'Love Story', image: 'songs/love-story.jpeg' },
+  { title: 'Nujabes', image: 'songs/folklore.jpg' }
+]
 
-Artist.all.each do |artist|
-  artist.albums.each do |album|
-    album.songs.each do |song|
-      artist.songs << song
-    end
-  end
-end
+albums = [
+  { title: 'Album Hyde', image: 'albums/hyde-album.jpg' },
+  { title: 'Album Nujabes ', image: 'albums/nujabes-album.jpg' },
+  { title: 'Album Sinatra', image: 'albums/sinatra-album.jpeg' },
+  { title: 'Album Taylor', image: 'albums/taylor-album.jpeg' },
+  { title: 'Album The Pillows', image: 'albums/the-pillows-album.jpg' }
+] 
 
+# create main users
+User.create(email: "frank@aa", username:'condef5',password:'aaaaaa', role:'admin')
+User.create(email: "mayra@aa",username:'mayra', password: 'aaaaaa', role:'admin')
+
+# create others users
 10.times do
   User.create(
     email: Faker::Internet.email,
@@ -52,7 +41,42 @@ end
   )
 end
 
-User.create(email: "frank@aa", username:'condef5',password:'aaaaaa', role:'admin')
-User.create(email: "mayra@aa",username:'mayra', password: 'aaaaaa', role:'admin')
+# create artists
+artist.each do |artist|
+  Artist.create(
+    name: artist[:name],
+    age: rand(40) + 10,
+    cover: get_image(artist[:image])
+  )
+end
+
+# create albums
+Artist.all.each_with_index do |artist, index|
+  artist.albums << Album.create(
+    title: albums[index][:title],
+    cover: get_image(albums[index][:image])
+  )
+  User.all.each { |user| Album.last.ratings.create(value: [1, -1].sample, user_id: user.id)}
+end
+
+# create songs
+Album.all.each_with_index do |album, index|
+    album.songs << Song.create(
+      title: songs[index][:title],
+      duration: rand(7200) + 1,
+      progress: 0,
+      cover: get_image(songs[index][:image])
+    )
+    User.all.each { |user| Song.last.ratings.create(value: [1, -1].sample, user_id: user.id)}
+end
+
+# add relations
+Artist.all.each do |artist|
+  artist.albums.each do |album|
+    album.songs.each do |song|
+      artist.songs << song
+    end
+  end
+end
 
 p 'Seed added correctly'

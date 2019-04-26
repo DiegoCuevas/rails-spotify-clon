@@ -1,6 +1,5 @@
 <h1><%= @song.title %></h1>
 <p><%= @song.duration %></p>
-<p><%= @song.rating %></p>
 <p><%= @song.progress %></p>
 <% if @song.cover.attached? %>
   <img src="<%= url_for(@song.cover) %>" width="500" />

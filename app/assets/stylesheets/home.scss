@@ -54,6 +54,12 @@ nav {
   margin: auto;
 }
 
+.pad {
+  @media screen and (max-width: 1200px) {
+    padding: 1em;
+  }
+}
+
 .actions {
   margin: 1em 0;
 }
@@ -91,5 +97,24 @@ table th {
   border-width: 0 0 1px;
   padding: 0.5em 0.75em;
   vertical-align: center;
+  text-align: center;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  & > div {
+    max-width: calc(25% - 20px);
+    padding: 10px;
+  }
+  img {
+    margin-top: 10px;
+    max-width: 100%;
+  }
+}
+
+/* helpers */
+.text-center {
   text-align: center;
 }

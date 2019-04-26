@@ -1,0 +1,18 @@
+<h2>List of songs</h2>
+
+<div class="grid">
+  <% @songs.each do |song| %>
+    <div>
+      <%= link_to song.title, "#" %>
+      <div>
+        <% if song.cover.attached? %>
+          <%= image_tag song.cover.variant(resize: "300x200") %>
+        <% end %>
+      </div>
+      <div class="text-center">
+        <span>👍  <%= song.ratings.where(value: 1).size %> </span>
+        <span>👎 <%=  song.ratings.where(value: -1).size %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

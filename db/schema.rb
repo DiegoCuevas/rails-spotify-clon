@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_26_000006) do
+ActiveRecord::Schema.define(version: 2019_04_26_160432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2019_04_26_000006) do
 
   create_table "albums", force: :cascade do |t|
     t.string "title"
-    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,10 +67,20 @@ ActiveRecord::Schema.define(version: 2019_04_26_000006) do
     t.index ["user_id"], name: "index_providers_on_user_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "value"
+    t.string "ratingable_type"
+    t.bigint "ratingable_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ratingable_type", "ratingable_id"], name: "index_ratings_on_ratingable_type_and_ratingable_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "songs", force: :cascade do |t|
     t.string "title"
     t.integer "duration"
-    t.integer "rating"
     t.integer "progress"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -96,4 +105,5 @@ ActiveRecord::Schema.define(version: 2019_04_26_000006) do
   add_foreign_key "associations", "artists"
   add_foreign_key "associations", "songs"
   add_foreign_key "providers", "users"
+  add_foreign_key "ratings", "users"
 end
