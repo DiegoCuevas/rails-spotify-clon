@@ -21,8 +21,13 @@
 
   <div class="field">
     <%= f.label :rating %>
-    <%= f.text_field :rating %>
+    <%= f.number_field :rating %>
   </div>
+
+  <p class="field">
+    <%= f.label :cover %><br />
+    <%= f.file_field :cover %>
+  </p>
 
   <div class="field">
     <%= f.label :progress %>

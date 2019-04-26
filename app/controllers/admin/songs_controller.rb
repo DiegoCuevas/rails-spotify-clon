@@ -40,7 +40,7 @@ module Admin
     private
 
     def song_params
-      params.require(:song).permit(:title, :duration, :rating, :progress)
+      params.require(:song).permit(:title, :duration, :rating, :progress, :cover)
     end
   end
 end

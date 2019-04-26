@@ -54,4 +54,5 @@ end
 
 User.create(email: "frank@aa", username:'condef5',password:'aaaaaa', role:'admin')
 User.create(email: "mayra@aa",username:'mayra', password: 'aaaaaa', role:'admin')
+
 p 'Seed added correctly'

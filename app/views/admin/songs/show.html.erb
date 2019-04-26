@@ -2,6 +2,13 @@
 <p><%= @song.duration %></p>
 <p><%= @song.rating %></p>
 <p><%= @song.progress %></p>
-<%= link_to "Delete", admin_song_path(@song), method: :delete, data: { confirm: "Really delete the song?" } %>
-<%= link_to "Songs List", admin_songs_path %>
-<%= link_to "Edit", edit_admin_song_path(@song) %>
+<% if @song.cover.attached? %>
+  <img src="<%= url_for(@song.cover) %>" width="500" />
+<% end %>
+
+<div class="actions">
+  <%= link_to "Edit", edit_admin_song_path(@song) %>
+  <%= link_to "Delete", admin_song_path(@song), method: :delete, data: { confirm: "Really delete the song?" } %>
+</div>
+
+<%= link_to 'Back', admin_songs_path %>
