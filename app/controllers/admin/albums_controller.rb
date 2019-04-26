@@ -14,8 +14,11 @@ module Admin
 
     def create
       @album = Album.new(album_params)
-      @album.save
-      redirect_to admin_album_path(@album), notice: "The album was successfully created"
+      if @album.save
+        redirect_to admin_album_path(@album), notice: "The album was successfully created"
+      else
+        render :new
+      end
     end
     
     def edit
@@ -40,7 +43,7 @@ module Admin
     private
 
     def album_params
-      params.require(:album).permit(:title, :rating)
+      params.require(:album).permit(:title, :rating, :cover)
     end
   end
 end

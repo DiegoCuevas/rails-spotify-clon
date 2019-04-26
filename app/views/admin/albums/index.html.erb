@@ -1,5 +1,7 @@
 <h1>List of albums</h1>
 
+<%= link_to "Create a New Album", new_admin_album_path %>
+
 <ul>
   <% @albums.each do |album| %>
     <li>
@@ -8,5 +10,3 @@
   <% end %>
 </ul>
 
-
-<%= link_to "Create a New Album", new_admin_album_path %>
