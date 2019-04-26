@@ -1,5 +1,8 @@
 module Api
   class SongsController < ApplicationController
+
+    skip_before_action :authorization
+
     def index
       render json: Song.all
     end

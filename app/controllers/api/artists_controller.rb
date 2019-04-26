@@ -1,5 +1,8 @@
 module Api
   class ArtistsController < ApplicationController
+
+    skip_before_action :authorization
+
     def index
       @artists = Artist.all
       render json: @artists 

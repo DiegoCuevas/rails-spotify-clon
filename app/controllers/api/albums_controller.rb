@@ -1,5 +1,8 @@
 module Api
-  class AlbumsController < ApplicationController 
+  class AlbumsController < ApplicationController
+
+    skip_before_action :authorization
+
     def show
       render json: Album.find(params[:id])
     end
