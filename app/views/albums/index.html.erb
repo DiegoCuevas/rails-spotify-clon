@@ -9,9 +9,19 @@
           <%= image_tag album.cover.variant(resize: "300x200") %>
         <% end %>
       </div>
-      <div class="text-center">
-        <span>👍  <%= album.ratings.where(value: 1).size %> </span>
-        <span>👎 <%=  album.ratings.where(value: -1).size %></span>
+      <div class="text-center icons">
+        <div class="<%= album.like?(current_user) ? 'active' : '' %>">
+          <%= link_to rating_album_path(album, :rating => 1), method: :post do %>
+            <%= render 'svg/thumbs-up.svg' %>
+            <span> <%= album.ratings.where(value: 1).size %> </span>
+          <% end %>
+        </div>
+        <div class="<%= album.unlike?(current_user) ? 'active' : '' %>">
+          <%= link_to rating_album_path(album, :rating => -1), method: :post do %>
+            <%= render 'svg/thumbs-down.svg' %>
+            <span> <%=  album.ratings.where(value: -1).size %></span>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>

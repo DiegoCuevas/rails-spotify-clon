@@ -32,9 +32,12 @@ Rails.application.routes.draw do
     resources :artists
     resources :albums
   end
-
-  resources :albums, only: [:index, :show]
+  
+  resources :albums, only: [:index, :show] do
+    post 'rating', on: :member
+  end
   resources :artists, only: [:index, :show]
-  resources :songs, only: [:index, :show]
-
+  resources :songs, only: [:index, :show] do
+    post 'rating', on: :member
+  end
 end

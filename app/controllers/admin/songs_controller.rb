@@ -15,8 +15,11 @@ module Admin
 
     def create
       @song = Song.new(song_params)
-      @song.save
-      redirect_to admin_song_path(@song), notice: "The song was successfully created"
+      if @song.save(song_params)
+        redirect_to admin_song_path(@song), notice: "The song was successfully created"
+      else
+        render :new
+      end
     end
     
     def edit

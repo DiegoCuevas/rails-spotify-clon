@@ -8,4 +8,12 @@ class Song < ApplicationRecord
   validates :title, presence: true, length: { maximum: 100 }
   validates :duration, presence: true, numericality: { only_integer: true }
   validates :progress, presence: true, numericality: { only_integer: true }
+  
+  def like?(user)
+    ratings.where(user_id: user.id, value: 1).any?
+  end
+ 
+  def unlike?(user)
+    ratings.where(user_id: user.id, value: -1).any?
+  end
 end
