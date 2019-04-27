@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :providers
   has_many :ratings
 
+  after_create :send_notification_new_users_to_admins
   after_create :send_welcome_mail
 
   def self.from_omniauth(auth)
@@ -18,9 +19,6 @@ class User < ApplicationRecord
     Provider.find_or_create_by(name: auth.provider, uid: auth.uid, user_id: user.id)
     user
   end
-  def send_welcome_mail
-    UserMailer.welcome_user(self).deliver_later
-  end
 
   def admin?
     self.role == "admin"
@@ -28,6 +26,15 @@ class User < ApplicationRecord
 
   def regular?
     self.role == "regular"
+  end
+
+  private
+  def send_welcome_mail
+    UserMailer.welcome_user(self).deliver_later
+  end
+
+  def send_notification_new_users_to_admins
+    AdminMailer.with(user: self).new_user_created.deliver_later
   end
 
 end

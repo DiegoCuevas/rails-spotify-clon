@@ -1,6 +1,6 @@
-# My awesome seed 
+# My awesome seed
 require "faker"
- 
+
 def get_image(file_name)
   { io: File.open(File.join(Rails.root, "/app/assets/images/seed/#{file_name}")), filename: file_name }
 end
@@ -27,14 +27,14 @@ albums = [
   { title: 'Album Sinatra', image: 'albums/sinatra-album.jpeg' },
   { title: 'Album Taylor', image: 'albums/taylor-album.jpeg' },
   { title: 'Album The Pillows', image: 'albums/the-pillows-album.jpg' }
-] 
+]
 
 # create main users
-User.create(email: "frank@aa", username:'condef5',password:'aaaaaa', role:'admin')
-User.create(email: "mayra@aa",username:'mayra', password: 'aaaaaa', role:'admin')
+User.create(email: "yummta+uno@gmail.com", username:'condef5',password:'aaaaaa', role:'admin')
+User.create(email: "yummta+dos@gmail.com",username:'mayra', password: 'aaaaaa', role:'admin')
 
 # create others users
-10.times do
+30.times do
   User.create(
     email: Faker::Internet.email,
     username: Faker::Internet.user_name,
