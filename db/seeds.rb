@@ -30,7 +30,8 @@ albums = [
 ]
 
 # create main users
-User.create(email: "yummta+uno@gmail.com", username:'condef5',password:'aaaaaa', role:'admin')
+User.create(email: "davis.con.fab@gmail.com", username:'condef5',password:'conde123', role:'regular')
+User.create(email: "yummta+uno@gmail.com", username:'yummta',password:'aaaaaa', role:'admin')
 User.create(email: "yummta+dos@gmail.com",username:'mayra', password: 'aaaaaa', role:'admin')
 
 # create others users

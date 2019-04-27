@@ -1,0 +1,9 @@
+<h1><%= @song.title %></h1>
+
+<div>
+  <% if @song.cover.attached? %>
+    <img src="<%= url_for(@song.cover) %>" width="500" />
+  <% end %>
+</div>
+
+<%= link_to 'Back', songs_path %>
