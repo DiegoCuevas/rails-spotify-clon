@@ -11,7 +11,7 @@
   <% if @album.songs.any? %>
     <% @album.songs.each do |song| %>
       <li>
-        <%= link_to song.title, admin_song_path(song) %>
+        <%= link_to song.title, song_path(song) %>
       </li>
     <% end %>
   <% else %>

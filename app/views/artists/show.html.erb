@@ -6,4 +6,17 @@
   <% end %>
 </div>
 
+<h3>Albums</h3>
+<ul>
+  <% if @artist.albums.any? %>
+    <% @artist.albums.each do |album| %>
+      <li>
+        <%= link_to album.title, album_path(album) %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>There are not albums</li>
+  <% end %>
+</ul>
+
 <%= link_to 'Back', artists_path %>
