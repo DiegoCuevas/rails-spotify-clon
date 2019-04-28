@@ -1,0 +1,9 @@
+test
+
+Hi,
+<%= @artist.name.capitalize %> is here to stay!.
+
+Check which are the albums we have for you!
+<% @albums.each do |album| %>
+- <%= album.title %>
+<% end %>

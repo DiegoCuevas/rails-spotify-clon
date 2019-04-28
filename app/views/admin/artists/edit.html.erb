@@ -1,5 +1,38 @@
-<h1>Edit Song</h1>
+<h1>Edit Artist</h1>
 
 <%= render 'form', artist: @artist %>
 
-<%= link_to 'Back', admin_artists_path %>
+<br>
+
+<h3>Albums</h3>
+
+<form action="/admin/add_album_artist" method="post">
+  <select name="album_id">
+    <option selected disabled>Select one Album</option>
+    <% Album.all.each do |album_option| %>
+      <% if  @artist.albums.where(id: album_option.id).count == 0 %>
+        <option value="<%=album_option.id%>"><%=album_option.title%></option>
+      <%end%>
+    <%end%>
+  </select>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="hidden" name="artist_id" value="<%=@artist.id%>">
+  <input type="submit" value="Add">
+</form>
+
+<ul>
+  <% if @artist.albums.any? %>
+    <% @artist.albums.each do |album| %>
+      <li>
+        <%= album.title%>
+        <%= link_to "Delete", "#{admin_delete_album_artist_path}?album_id=#{album.id}&artist_id=#{@artist.id}", method: :delete %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>This Artist doesn't have any Album.</li>
+  <% end %>
+</ul>
+
+<br>
+<%= link_to 'Back', admin_artist_path(@artist) %>
+

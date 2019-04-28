@@ -4,11 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: %i[facebook github]
-
+  validates :username, presence: true
   has_many :providers
   has_many :ratings
 
   after_create :send_notification_new_users_to_admins
+  after_create :send_welcome_mail
+
   after_create :send_welcome_mail
 
   def self.from_omniauth(auth)
@@ -18,6 +20,9 @@ class User < ApplicationRecord
     end
     Provider.find_or_create_by(name: auth.provider, uid: auth.uid, user_id: user.id)
     user
+  end
+  def send_welcome_mail
+    UserMailer.welcome_user(self).deliver_later
   end
 
   def admin?

@@ -34,8 +34,10 @@ Rails.application.routes.draw do
     resources :albums
     post "/add_song_album", to: "albums#add_song"
     delete "/delete_song_album", to: "albums#delete_song"
+    post "/add_album_artist", to: "artists#add_album"
+    delete "/delete_album_artist", to: "artists#delete_album"
   end
-  
+
   resources :albums, only: [:index, :show] do
     post 'rating', on: :member
   end

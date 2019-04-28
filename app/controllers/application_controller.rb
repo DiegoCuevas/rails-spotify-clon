@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authentication, :authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -32,10 +32,17 @@ class ApplicationController < ActionController::Base
   def authorization
     unless devise_controller?
       if current_user
-        authorize current_user, policy_class: AdminPolicy 
+        authorize current_user, policy_class: AdminPolicy
       else
         user_not_authorized
       end
     end
   end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+  end
+
 end

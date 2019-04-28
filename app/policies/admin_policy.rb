@@ -41,4 +41,11 @@ class AdminPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def add_album?
+    user.admin?
+  end
+
+  def delete_album?
+    user.admin?
+  end
 end

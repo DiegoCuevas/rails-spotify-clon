@@ -1,0 +1,20 @@
+<h2>Hi,</h2>
+<p><%= @artist.name.capitalize %> is here to stay!. </p>
+<p> </p>
+<% if @artist.cover.attached? %>
+<p><%= image_tag attachments&.inline[@artist.id.to_s + ".png"].url, alt:"#{@artist.name} image", size:"200" -%> </p>
+<% end %>
+<p>Check which are the albums we have for you!</p>
+<table style="height: 67px; float: left;" width="338">
+  <tbody>
+    <tr>
+    <td style="width: 161.062px; text-align: center;"><strong>Albums</strong></td>
+    </tr>
+  <%@albums.each do |album|%>
+    <tr>
+    <td style="width: 161.062px"><%= album.title %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  
+</table>

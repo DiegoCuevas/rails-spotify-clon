@@ -59,4 +59,22 @@ class UserMailer < ApplicationMailer
     @album = params[:album]
     mail(to: User.all.pluck(:email), subject: 'New album has been published')
   end
+
+  def self.send_request(artist)
+    emails = User.all.map {|user| %("#{user.username}" <#{user.email}>) }
+    username = User.all.pluck(:username)
+    emails.each.with_index { |email,index|
+      new_artist_email_all_users(email,artist,username[index]).deliver_later
+      }
+  end
+
+  def new_artist_email_all_users(email, artist, username)
+    @item = artist
+    @username = username
+    @albums = artist.albums
+    @artist = artist
+    attachments.inline[artist.id.to_s + ".png"] = File.read(ActiveStorage::Blob.service.send(:path_for, artist.cover.key)) if artist.cover.attached?
+    mail(to: email, subject: 'New Artist in Spotify!')
+  end
+
 end
