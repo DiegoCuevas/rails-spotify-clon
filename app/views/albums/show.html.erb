@@ -6,4 +6,17 @@
   <% end %>
 </div>
 
+<h3>Songs</h3>
+<ul>
+  <% if @album.songs.any? %>
+    <% @album.songs.each do |song| %>
+      <li>
+        <%= link_to song.title, admin_song_path(song) %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>There are not songs</li>
+  <% end %>
+</ul>
+
 <%= link_to 'Back', albums_path %>

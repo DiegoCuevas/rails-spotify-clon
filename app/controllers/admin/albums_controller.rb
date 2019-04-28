@@ -47,9 +47,6 @@ module Admin
       album = Album.find(params[:album_id])
       song = Song.find(params[:song_id])
       album.songs << song
-      p $new_albums
-      p params[:album_id]
-
       if $new_albums.include?(params[:album_id].to_i)
         UserMailer.with(album: album).send_new_album.deliver_later
         $new_albums.delete(params[:album_id].to_i)
