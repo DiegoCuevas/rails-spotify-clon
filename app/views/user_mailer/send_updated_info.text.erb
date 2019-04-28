@@ -1,0 +1,9 @@
+Hi <%= @user.username %>
+In order to keep you abreast of the new musical trends, this is the list of the top 3 about <%= @msg.downcase %>:
+<% @data.each do |row| %>
+  -<%= row.class.to_s != "Artist" ? row.title : row.name%>
+<% end %>
+
+We will continue informing you about any changes in the trends
+
+Thanks for joining our service! Please check back often.

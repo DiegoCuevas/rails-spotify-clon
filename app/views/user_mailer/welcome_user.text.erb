@@ -1,3 +1,8 @@
 Hi <%= @user.username %>,
+Now, we have the following list of songs to recommend you to listen:
+<% @songs.each do |song| %>
+-<%= song.title %>
+<% end %>
+We will continue informing you about any changes in the trends.
 
 Thanks for joining our service! Please check back often.

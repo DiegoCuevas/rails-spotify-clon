@@ -1,3 +1,9 @@
 <h2>Welcome <%= @user.username %></h2>
-<div>
+<p>Now, we have the following list of songs to recommend you to listen:
+<ul>
+<% @songs.each do |song| %>
+  <li><%= song.title %></li>
+<% end %>
+</ul>
+<p>We will continue informing you about any changes in the trends</p>
 <div>Thanks for joining our service! Please check back often.</div>
