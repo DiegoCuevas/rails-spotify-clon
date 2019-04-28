@@ -4,9 +4,24 @@
   <img src="<%= url_for(@album.cover) %>" width="500" />
 <% end %>
 
+<h3>Songs</h3>
+<ul>
+  <% if @album.songs.any? %>
+    <% @album.songs.each do |song| %>
+      <li>
+        <%= link_to song.title, admin_album_path(song) %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>There are not songs</li>
+  <% end %>
+</ul>
+
+<hr>
+
 <div class="actions">
+  <%= link_to 'Back', admin_albums_path %>
   <%= link_to "Edit", edit_admin_album_path(@album) %>
   <%= link_to "Delete", admin_album_path(@album), method: :delete, data: { confirm: "Really delete the album?" } %>
 </div>
 
-<%= link_to 'Back', admin_albums_path %>

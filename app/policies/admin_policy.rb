@@ -32,4 +32,13 @@ class AdminPolicy < ApplicationPolicy
   def destroy?
     user.admin?
   end
+
+  def add_song?
+    user.admin?
+  end
+
+  def delete_song?
+    user.admin?
+  end
+
 end

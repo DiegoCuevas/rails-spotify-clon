@@ -2,4 +2,36 @@
 
 <%= render 'form', album: @album %>
 
-<%= link_to 'Back', admin_albums_path %>
+<br>
+
+<h3>Songs</h3>
+
+<form action="/admin/add_song_album" method="post">
+  <select name="song_id">
+    <option selected disabled>Select one song</option>
+    <% Song.all.each do |song_option| %>
+      <% if  @album.songs.where(id: song_option.id).count == 0 %>
+        <option value="<%=song_option.id%>"><%=song_option.title%></option>
+      <%end%>
+    <%end%>
+  </select>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="hidden" name="album_id" value="<%=@album.id%>">
+  <input type="submit" value="Add">
+</form>
+
+<ul>
+  <% if @album.songs.any? %>
+    <% @album.songs.each do |song| %>
+      <li>
+        <%= song.title%>
+        <%= link_to "Delete", "#{admin_delete_song_album_path}?song_id=#{song.id}&album_id=#{@album.id}", method: :delete %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>This album doesn't have songs yet.</li>
+  <% end %>
+</ul>
+
+<br>
+<%= link_to 'Back', admin_album_path(@album) %>

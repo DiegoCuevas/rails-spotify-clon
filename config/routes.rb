@@ -26,11 +26,14 @@ Rails.application.routes.draw do
     end
   end
   root 'home#index'
+
   namespace :admin do
     root 'home#index'
     resources :songs
     resources :artists
     resources :albums
+    post "/add_song_album", to: "albums#add_song"
+    delete "/delete_song_album", to: "albums#delete_song"
   end
   
   resources :albums, only: [:index, :show] do

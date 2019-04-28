@@ -30,9 +30,10 @@ albums = [
 ]
 
 # create main users
-User.create(email: "davis.con.fab@gmail.com", username:'condef5',password:'conde123', role:'regular')
-User.create(email: "linzeur@gmail.com", username:'yummta',password:'123456', role:'admin')
-User.create(email: "yummta@gmail.com",username:'mayra', password: 'aaaaaa', role:'admin')
+User.create(email: "yummta+regular1@gmail.com", username:'yummta+regular1',password:'poipoi', role:'regular')
+User.create(email: "yummta+regular2@gmail.com", username:'yummta+regular2',password:'poipoi', role:'regular')
+User.create(email: "yummta+admin1@gmail.com", username:'yummta+admin1',password:'poipoi', role:'admin')
+User.create(email: "yummta+admin2@gmail.com",username:'yummta+admin2', password: 'poipoi', role:'admin')
 
 # create others users
 30.times do

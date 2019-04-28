@@ -10,7 +10,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @songs = Song.joins(:ratings).where("ratings.value = 1").group("id").order("COUNT(ratings.ratingable_id) DESC").limit(3)
     email_with_name = %("#{@user.username}" <#{@user.email}>)
-    
+
     mail(to: email_with_name, subject: 'Welcome to Spotify')
   end
 
@@ -53,5 +53,10 @@ class UserMailer < ApplicationMailer
     @msg = mail_subject
     email_with_name = %("#{user.username}" <#{user.email}>)
     mail(to: email_with_name, subject: mail_subject)
+  end
+
+  def send_new_album
+    @album = params[:album]
+    mail(to: User.all.pluck(:email), subject: 'New album has been published')
   end
 end
